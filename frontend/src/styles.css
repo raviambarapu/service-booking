@@ -1,40 +1,401 @@
-:root { --primary:#2563eb; --danger:#dc2626; --bg:#f3f4f6; --text:#111827; --muted:#6b7280; --border:#e5e7eb; }
-* { box-sizing: border-box; }
-body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
-.container { max-width: 1000px; margin: 0 auto; padding: 1.25rem; }
-.navbar { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:space-between; align-items:center; background:#fff; padding:.75rem 1.25rem; border-bottom:1px solid var(--border); }
-.navbar nav { display:flex; flex-wrap:wrap; gap:1rem; align-items:center; }
-.navbar a { color:var(--text); text-decoration:none; }
-.navbar a.active { color:var(--primary); font-weight:600; }
-.brand { font-weight:700; font-size:1.2rem; }
-.user-name { color:var(--muted); font-size:.9rem; }
-.card { background:#fff; border:1px solid var(--border); border-radius:12px; padding:1rem; margin-bottom:1rem; }
-.auth-card { max-width:420px; margin: 2rem auto; }
-label { display:block; margin:.6rem 0 .25rem; font-size:.9rem; font-weight:600; }
-input, select { width:100%; padding:.6rem; border:1px solid var(--border); border-radius:8px; font-size:1rem; background:#fff; }
-.btn { background:var(--primary); color:#fff; border:1px solid var(--primary); padding:.55rem 1rem; border-radius:8px; cursor:pointer; font-size:.95rem; margin-top:.75rem; }
-.btn:disabled { opacity:.6; cursor:not-allowed; }
-.btn-outline { background:#fff; color:var(--primary); }
-.btn-danger { background:var(--danger); border-color:var(--danger); }
-.navbar .btn { margin-top:0; }
-.alert { padding:.7rem 1rem; border-radius:8px; margin-bottom:1rem; }
-.alert-error { background:#fee2e2; color:#991b1b; }
-.alert-success { background:#dcfce7; color:#166534; }
-.muted { color:var(--muted); }
-.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:1rem; }
-.slot { display:flex; flex-direction:column; gap:.25rem; margin:0; }
-.filters { display:flex; gap:1rem; flex-wrap:wrap; }
-.filters .grow { flex:1; min-width:200px; }
-.booking { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
-.actions { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
-.actions .btn, .actions select { margin-top:0; width:auto; }
-.badge { margin-left:.6rem; padding:.15rem .6rem; border-radius:999px; font-size:.75rem; text-transform:capitalize; }
-.badge-booked { background:#dbeafe; color:#1e40af; }
-.badge-cancelled { background:#fee2e2; color:#991b1b; }
-.badge-completed { background:#dcfce7; color:#166534; }
-.inline-form { display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end; }
-.inline-form .btn { margin-top:0; }
-.table-wrap { overflow-x:auto; background:#fff; border:1px solid var(--border); border-radius:12px; margin-bottom:1.5rem; }
-table { width:100%; border-collapse:collapse; }
-th, td { text-align:left; padding:.7rem; border-bottom:1px solid var(--border); font-size:.92rem; }
-@media (max-width:600px) { .booking { flex-direction:column; align-items:flex-start; } }
+
+/* =====================================
+   BOOKIT LOGIN PAGE
+===================================== */
+
+.bookit-login-page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #17243b;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.login-navbar {
+  height: 78px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #edf0f5;
+  background: #ffffff;
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #17243b;
+  font-size: 25px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.login-brand-icon {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #2463eb;
+  color: white;
+  font-size: 21px;
+}
+
+.login-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #788399;
+  font-size: 13px;
+}
+
+.login-signup-link {
+  padding: 10px 17px;
+  border: 1px solid #dce5f5;
+  border-radius: 7px;
+  color: #2463eb;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.login-signup-link:hover {
+  background: #f1f5ff;
+}
+
+.login-main {
+  min-height: calc(100vh - 78px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Left visual panel */
+
+.login-visual {
+  position: relative;
+  min-height: 650px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 9%;
+  background: linear-gradient(145deg, #163f91, #2463d9 65%, #3e83ed);
+  color: #ffffff;
+}
+
+.visual-content {
+  position: relative;
+  z-index: 2;
+  max-width: 490px;
+}
+
+.visual-tag {
+  display: inline-block;
+  padding: 9px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #dceaff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.visual-content h1 {
+  margin: 30px 0 18px;
+  color: #ffffff;
+  font-size: clamp(36px, 4vw, 55px);
+  line-height: 1.13;
+  letter-spacing: -1.7px;
+}
+
+.visual-content p {
+  max-width: 430px;
+  color: #dce8ff;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.visual-features {
+  display: grid;
+  gap: 19px;
+  margin-top: 38px;
+}
+
+.visual-features div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f0f5ff;
+  font-size: 14px;
+}
+
+.visual-features span {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.19);
+  font-size: 12px;
+}
+
+.visual-decoration {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.decoration-one {
+  width: 430px;
+  height: 430px;
+  right: -190px;
+  top: 8%;
+}
+
+.decoration-two {
+  width: 300px;
+  height: 300px;
+  right: -120px;
+  top: 19%;
+}
+
+.visual-footer {
+  position: absolute;
+  right: 9%;
+  bottom: 25px;
+  left: 9%;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  color: #cbdcff;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* Right login form */
+
+.login-form-section {
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 55px 35px;
+  background: #ffffff;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-mobile-brand {
+  display: none;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 38px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.login-heading {
+  margin-bottom: 35px;
+}
+
+.login-eyebrow {
+  color: #2463eb;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.6px;
+}
+
+.login-heading h2 {
+  margin: 13px 0 10px;
+  color: #17243b;
+  font-size: 31px;
+  letter-spacing: -0.8px;
+}
+
+.login-heading p {
+  margin: 0;
+  color: #8791a3;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.bookit-login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookit-login-form label {
+  margin-bottom: 9px;
+  color: #34415a;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.bookit-login-form input {
+  width: 100%;
+  height: 49px;
+  padding: 0 14px;
+  margin: 0 0 23px;
+  border: 1px solid #dfe5ee;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #17243b;
+  font-size: 13px;
+  box-shadow: none;
+}
+
+.bookit-login-form input::placeholder {
+  color: #a6afbd;
+}
+
+.bookit-login-form input:focus {
+  outline: none;
+  border-color: #2463eb;
+  box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.09);
+}
+
+.password-label-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  padding-right: 65px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px;
+  border: none;
+  background: transparent;
+  color: #2463eb;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.bookit-login-button {
+  width: 100%;
+  height: 49px;
+  margin-top: 5px;
+  padding: 0 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #2463eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.bookit-login-button:hover {
+  background: #194fc5;
+  transform: translateY(-1px);
+}
+
+.bookit-login-button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.bookit-login-button span {
+  font-size: 19px;
+}
+
+.login-error {
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #b42318;
+  font-size: 12px;
+}
+
+.login-register-text {
+  margin-top: 27px;
+  color: #8490a2;
+  text-align: center;
+  font-size: 12px;
+}
+
+.login-register-text a {
+  color: #2463eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-security {
+  margin-top: 42px;
+  padding-top: 20px;
+  border-top: 1px solid #edf0f5;
+  color: #99a2b1;
+  text-align: center;
+  font-size: 11px;
+}
+
+.login-security span {
+  margin-right: 6px;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .login-main {
+    grid-template-columns: 1fr;
+  }
+
+  .login-visual {
+    display: none;
+  }
+
+  .login-form-section {
+    min-height: calc(100vh - 78px);
+    padding: 40px 25px;
+  }
+
+  .login-mobile-brand {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-navbar {
+    height: 68px;
+    padding: 0 17px;
+  }
+
+  .login-nav-right {
+    gap: 9px;
+    font-size: 11px;
+  }
+
+  .login-signup-link {
+    padding: 8px 10px;
+  }
+
+  .login-form-section {
+    padding: 30px 22px;
+  }
+
+  .login-heading h2 {
+    font-size: 27px;
+  }
+}
+

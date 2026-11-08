@@ -1,0 +1,749 @@
+
+* {
+  box-sizing: border-box;
+}
+
+.medislot-dashboard {
+  min-height: 100vh;
+  display: flex;
+  background: #f4f7fc;
+  color: #17243e;
+  font-family: Inter, Arial, sans-serif;
+}
+
+/* SIDEBAR */
+
+.medislot-sidebar {
+  width: 245px;
+  min-width: 245px;
+  min-height: 100vh;
+  padding: 28px 17px;
+  display: flex;
+  flex-direction: column;
+  background: #14264d;
+  color: white;
+}
+
+.medislot-side-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 10px 38px;
+  color: white;
+  font-size: 23px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.medislot-side-logo-icon {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  background: #3478f6;
+  border-radius: 11px;
+  font-size: 24px;
+}
+
+.medislot-side-label {
+  padding: 12px;
+  color: #93a5c5;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.medislot-side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.medislot-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 13px;
+  color: #c5d1e7;
+  text-decoration: none;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.medislot-nav-link span {
+  font-size: 19px;
+  width: 22px;
+  text-align: center;
+}
+
+.medislot-nav-link:hover,
+.medislot-nav-link.active {
+  background: #2864d5;
+  color: white;
+}
+
+.medislot-sidebar-bottom {
+  margin-top: auto;
+}
+
+.medislot-help-card {
+  padding: 17px;
+  margin-bottom: 22px;
+  background: #20375f;
+  border-radius: 12px;
+}
+
+.medislot-help-card span {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.medislot-help-card p {
+  color: #c0cee5;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.medislot-logout {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid #354b70;
+  border-radius: 9px;
+  color: white;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.medislot-logout span {
+  margin-right: 12px;
+  font-size: 19px;
+}
+
+/* MAIN CONTENT */
+
+.medislot-content {
+  flex: 1;
+  min-width: 0;
+  padding: 28px 38px;
+}
+
+.medislot-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.medislot-topbar-label {
+  color: #71819c;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+.medislot-topbar h2 {
+  margin: 6px 0 0;
+  font-size: 25px;
+}
+
+.medislot-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.medislot-notification {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e3e9f2;
+  border-radius: 10px;
+  background: white;
+  color: #356dd5;
+  font-size: 20px;
+}
+
+.medislot-avatar {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dce9ff;
+  color: #245bca;
+  font-weight: 800;
+}
+
+.medislot-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.medislot-profile-info strong {
+  font-size: 13px;
+}
+
+.medislot-profile-info span {
+  color: #8591a5;
+  font-size: 11px;
+}
+
+/* WELCOME CARD */
+
+.medislot-welcome-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 35px;
+  min-height: 185px;
+  color: white;
+  background: linear-gradient(110deg, #347cf2, #2258c8);
+  border-radius: 17px;
+}
+
+.medislot-welcome-card > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.medislot-welcome-card > div:first-child > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  color: #dce9ff;
+}
+
+.medislot-welcome-card h1 {
+  margin: 13px 0 9px;
+  font-size: clamp(23px, 3vw, 32px);
+}
+
+.medislot-welcome-card p {
+  margin: 0;
+  color: #e5efff;
+  font-size: 14px;
+}
+
+.medislot-welcome-icon {
+  width: 115px;
+  height: 115px;
+  display: grid;
+  place-items: center;
+  margin-right: 25px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  color: white;
+  font-size: 78px;
+}
+
+/* STATISTICS */
+
+.medislot-slot-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 23px 0;
+}
+
+.medislot-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e9eef6;
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(24, 46, 85, .025);
+}
+
+.medislot-stat-icon {
+  width: 47px;
+  height: 47px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 23px;
+}
+
+.medislot-stat-icon.blue {
+  background: #eaf1ff;
+  color: #2868e4;
+}
+
+.medislot-stat-icon.green {
+  background: #e4f8ed;
+  color: #1b9c61;
+}
+
+.medislot-stat-icon.purple {
+  background: #f0eaff;
+  color: #8156d9;
+}
+
+.medislot-stat-card span {
+  color: #78869c;
+  font-size: 12px;
+}
+
+.medislot-stat-card h3 {
+  margin: 5px 0 0;
+  font-size: 23px;
+}
+
+/* FILTER SECTION */
+
+.medislot-filter-card,
+.medislot-available-section {
+  padding: 24px;
+  margin-bottom: 22px;
+  background: white;
+  border: 1px solid #e9eef6;
+  border-radius: 14px;
+}
+
+.medislot-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 23px;
+}
+
+.medislot-section-heading h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.medislot-section-heading p {
+  margin: 7px 0 0;
+  color: #8290a5;
+  font-size: 12px;
+}
+
+.medislot-refresh,
+.medislot-clear-filter {
+  padding: 11px 15px;
+  border: 1px solid #dce5f4;
+  border-radius: 9px;
+  background: white;
+  color: #3268d2;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.medislot-filters {
+  display: flex;
+  align-items: end;
+  gap: 17px;
+}
+
+.medislot-filter-field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.medislot-filter-field label {
+  color: #35445e;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.medislot-filter-field input {
+  width: 100%;
+  height: 45px;
+  padding: 0 13px;
+  outline: none;
+  border: 1px solid #dce4f0;
+  border-radius: 9px;
+  color: #34435c;
+  background: #fff;
+  font-size: 13px;
+}
+
+.medislot-filter-field input:focus {
+  border-color: #3274e8;
+}
+
+/* SLOT CARDS */
+
+.medislot-count {
+  padding: 9px 13px;
+  background: #eaf2ff;
+  color: #2864d5;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.medislot-day-group {
+  margin-top: 25px;
+}
+
+.medislot-day-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.medislot-day-icon {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  background: #eaf1ff;
+  color: #2868e4;
+  border-radius: 9px;
+}
+
+.medislot-day-heading h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.medislot-day-heading > span:last-child {
+  margin-left: auto;
+  color: #8290a5;
+  font-size: 11px;
+}
+
+.medislot-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.medislot-slot-card {
+  padding: 17px;
+  border: 1px solid #e2e9f4;
+  border-radius: 12px;
+  background: white;
+  transition: .2s;
+}
+
+.medislot-slot-card:hover {
+  border-color: #78a5f7;
+  box-shadow: 0 5px 18px rgba(37,99,235,.08);
+}
+
+.medislot-slot-card.selected {
+  border: 2px solid #3478ed;
+  background: #f5f8ff;
+}
+
+.medislot-slot-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.medislot-slot-number {
+  color: #7c89a0;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.medislot-available-badge {
+  padding: 5px 8px;
+  background: #e5f8ed;
+  color: #18985b;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.medislot-slot-time {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.medislot-slot-time span {
+  color: #3478ed;
+  font-size: 21px;
+}
+
+.medislot-slot-time strong {
+  font-size: 20px;
+}
+
+.medislot-slot-duration {
+  margin: 8px 0 16px;
+  color: #8290a5;
+  font-size: 12px;
+}
+
+.medislot-book-button {
+  width: 100%;
+  height: 39px;
+  border: none;
+  border-radius: 8px;
+  background: #2563dc;
+  color: white;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.medislot-book-button:hover {
+  background: #174dbb;
+}
+
+.medislot-book-button.chosen {
+  background: #168b60;
+}
+
+/* SELECTED APPOINTMENT */
+
+.medislot-confirm-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 25px;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #dce8fc;
+  border-radius: 14px;
+}
+
+.medislot-confirm-info > span {
+  color: #3271e3;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.medislot-confirm-info h3 {
+  margin: 12px 0;
+  font-size: 20px;
+}
+
+.medislot-confirm-info p {
+  color: #78869c;
+  font-size: 13px;
+}
+
+.medislot-confirm-info strong {
+  font-size: 14px;
+}
+
+.medislot-confirm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.medislot-confirm-form label {
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.medislot-confirm-form textarea {
+  width: 100%;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid #dce4f0;
+  border-radius: 9px;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+}
+
+.medislot-confirm-button {
+  height: 43px;
+  background: #2563dc;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.medislot-confirm-button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* MESSAGES */
+
+.medislot-empty {
+  padding: 45px 15px;
+  text-align: center;
+  background: #f8faff;
+  border-radius: 12px;
+  color: #74839c;
+  font-size: 13px;
+}
+
+.medislot-empty > span {
+  font-size: 35px;
+}
+
+.medislot-empty h3 {
+  color: #233550;
+  font-size: 17px;
+}
+
+.medislot-error,
+.medislot-success {
+  padding: 15px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.medislot-error {
+  background: #fff0f0;
+  color: #c62828;
+}
+
+.medislot-error button {
+  margin-left: 10px;
+  border: none;
+  background: transparent;
+  color: #c62828;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.medislot-success {
+  background: #e8f8ef;
+  color: #15834e;
+}
+
+.medislot-success a {
+  display: inline-block;
+  margin-left: 12px;
+  color: #1763c5;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.medislot-page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 0;
+  color: #8995a9;
+  font-size: 11px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+  .medislot-sidebar {
+    width: 210px;
+    min-width: 210px;
+  }
+
+  .medislot-content {
+    padding: 24px;
+  }
+
+  .medislot-slot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .medislot-dashboard {
+    display: block;
+  }
+
+  .medislot-sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .medislot-side-logo {
+    padding: 5px 8px 15px;
+  }
+
+  .medislot-side-label,
+  .medislot-sidebar-bottom {
+    display: none;
+  }
+
+  .medislot-side-nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .medislot-nav-link {
+    white-space: nowrap;
+    padding: 11px;
+    font-size: 12px;
+  }
+
+  .medislot-content {
+    padding: 20px 14px;
+  }
+
+  .medislot-slot-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .medislot-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .medislot-slot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .medislot-confirm-card {
+    grid-template-columns: 1fr;
+  }
+
+  .medislot-welcome-icon {
+    display: none;
+  }
+
+  .medislot-welcome-card {
+    padding: 25px;
+  }
+
+  .medislot-section-heading {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .medislot-profile-info,
+  .medislot-notification {
+    display: none;
+  }
+
+  .medislot-topbar h2 {
+    font-size: 21px;
+  }
+
+  .medislot-filter-card,
+  .medislot-available-section {
+    padding: 16px;
+  }
+
+  .medislot-page-footer {
+    flex-direction: column;
+  }
+}
+
