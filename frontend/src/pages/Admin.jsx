@@ -25,9 +25,14 @@ export default function Admin() {
         api.get("/bookings"),
       ]);
 
-      setSlots(Array.isArray(slotResponse.data) ? slotResponse.data : []);
+      setSlots(
+        Array.isArray(slotResponse.data) ? slotResponse.data : []
+      );
+
       setBookings(
-        Array.isArray(bookingResponse.data) ? bookingResponse.data : []
+        Array.isArray(bookingResponse.data)
+          ? bookingResponse.data
+          : []
       );
     } catch (err) {
       setMessage({ type: "error", text: getError(err) });
@@ -86,7 +91,12 @@ export default function Admin() {
 
     const upcoming = bookings.filter((booking) => {
       const start = safeDate(booking.slot?.start_time);
-      return booking.status === "booked" && start && start >= now;
+
+      return (
+        booking.status === "booked" &&
+        start &&
+        start >= now
+      );
     }).length;
 
     const completed = bookings.filter(
@@ -116,6 +126,7 @@ export default function Admin() {
 
     bookings.forEach((booking) => {
       const date = safeDate(booking.slot?.start_time);
+
       if (date) counts[date.getDay()] += 1;
     });
 
@@ -123,7 +134,11 @@ export default function Admin() {
 
     return days.map((day, index) => {
       const actualIndex = (today - 6 + index + 7) % 7;
-      return { day, count: counts[actualIndex] };
+
+      return {
+        day,
+        count: counts[actualIndex],
+      };
     });
   }, [bookings]);
 
@@ -145,8 +160,31 @@ export default function Admin() {
   const recentBookings = [...filteredBookings].sort((a, b) => {
     const dateA = safeDate(a.slot?.start_time)?.getTime() || 0;
     const dateB = safeDate(b.slot?.start_time)?.getTime() || 0;
+
     return dateB - dateA;
   });
+
+  // Build customer list from the users included in bookings.
+  const customers = useMemo(() => {
+    const customerMap = new Map();
+
+    bookings.forEach((booking) => {
+      const customer = booking.user;
+
+      if (!customer?.id) return;
+
+      if (!customerMap.has(customer.id)) {
+        customerMap.set(customer.id, {
+          ...customer,
+          bookingCount: 1,
+        });
+      } else {
+        customerMap.get(customer.id).bookingCount += 1;
+      }
+    });
+
+    return Array.from(customerMap.values());
+  }, [bookings]);
 
   function navigateTo(tab, sectionId) {
     setActiveTab(tab);
@@ -175,12 +213,17 @@ export default function Admin() {
       {/* SIDEBAR */}
       <aside className="admin-sidebar">
 
-        <a className="admin-brand" href="/admin">
+        <a
+          className="admin-brand"
+          href="/admin"
+        >
           <span className="brand-icon">✚</span>
           <span>MediSlot</span>
         </a>
 
-        <div className="sidebar-label">MAIN MENU</div>
+        <div className="sidebar-label">
+          MAIN MENU
+        </div>
 
         <button
           className={`sidebar-link ${
@@ -216,7 +259,7 @@ export default function Admin() {
           className={`sidebar-link ${
             activeTab === "customers" ? "active" : ""
           }`}
-          onClick={() => navigateTo("customers", "appointments")}
+          onClick={() => navigateTo("customers", "customers")}
         >
           <span className="nav-icon">♙</span>
           Customers
@@ -255,7 +298,9 @@ export default function Admin() {
 
         <header className="admin-topbar">
           <div>
-            <p className="topbar-small">Workspace / Admin</p>
+            <p className="topbar-small">
+              Workspace / Admin
+            </p>
             <h2>Appointment Management</h2>
           </div>
 
@@ -281,9 +326,14 @@ export default function Admin() {
           )}
 
           {/* DASHBOARD HEADING */}
-          <section id="dashboard" className="dashboard-heading">
+          <section
+            id="dashboard"
+            className="dashboard-heading"
+          >
             <div>
-              <span className="section-kicker">OVERVIEW</span>
+              <span className="section-kicker">
+                OVERVIEW
+              </span>
 
               <h1>Dashboard Overview</h1>
 
@@ -347,7 +397,10 @@ export default function Admin() {
           </section>
 
           {/* CHARTS */}
-          <section id="analytics" className="analytics-grid">
+          <section
+            id="analytics"
+            className="analytics-grid"
+          >
 
             <div className="admin-panel chart-panel">
 
@@ -364,7 +417,10 @@ export default function Admin() {
 
               <div className="weekly-chart">
                 {weeklyData.map((item) => (
-                  <div className="chart-column" key={item.day}>
+                  <div
+                    className="chart-column"
+                    key={item.day}
+                  >
 
                     <span className="chart-value">
                       {item.count}
@@ -418,7 +474,10 @@ export default function Admin() {
                   fill: "red-fill",
                 },
               ].map((item) => (
-                <div className="summary-item" key={item.label}>
+                <div
+                  className="summary-item"
+                  key={item.label}
+                >
 
                   <div className="summary-row">
                     <span>
@@ -652,6 +711,70 @@ export default function Admin() {
 
           </section>
 
+          {/* CUSTOMERS */}
+          <section
+            id="customers"
+            className="admin-panel activity-panel"
+          >
+
+            <div className="panel-heading">
+              <div>
+                <h3>Registered Customers</h3>
+                <p>
+                  Customers who have booked appointments
+                </p>
+              </div>
+
+              <span>{customers.length} customers</span>
+            </div>
+
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+
+                <thead>
+                  <tr>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Email Address</th>
+                    <th>Total Bookings</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {customers.map((customer) => (
+                    <tr key={customer.id}>
+                      <td>#{customer.id}</td>
+
+                      <td>
+                        <strong>
+                          {customer.name || "Customer"}
+                        </strong>
+                      </td>
+
+                      <td>
+                        {customer.email || "—"}
+                      </td>
+
+                      <td>
+                        {customer.bookingCount}
+                      </td>
+                    </tr>
+                  ))}
+
+                  {!loading && customers.length === 0 && (
+                    <tr>
+                      <td colSpan="4" className="empty-table">
+                        No customers found.
+                      </td>
+                    </tr>
+                  )}
+
+                </tbody>
+              </table>
+            </div>
+
+          </section>
+
           {/* AVAILABILITY MANAGEMENT */}
           <section
             id="slots"
@@ -661,11 +784,16 @@ export default function Admin() {
             <div className="panel-heading">
               <div>
                 <h3>Manage Availability</h3>
-                <p>Create and manage appointment time slots</p>
+                <p>
+                  Create and manage appointment time slots
+                </p>
               </div>
             </div>
 
-            <form className="slot-form" onSubmit={createSlot}>
+            <form
+              className="slot-form"
+              onSubmit={createSlot}
+            >
 
               <div>
                 <label htmlFor="start">
@@ -678,7 +806,10 @@ export default function Admin() {
                   required
                   value={form.start}
                   onChange={(event) =>
-                    setForm({ ...form, start: event.target.value })
+                    setForm({
+                      ...form,
+                      start: event.target.value,
+                    })
                   }
                 />
               </div>
@@ -694,12 +825,18 @@ export default function Admin() {
                   required
                   value={form.end}
                   onChange={(event) =>
-                    setForm({ ...form, end: event.target.value })
+                    setForm({
+                      ...form,
+                      end: event.target.value,
+                    })
                   }
                 />
               </div>
 
-              <button type="submit" className="add-slot-button">
+              <button
+                type="submit"
+                className="add-slot-button"
+              >
                 ＋ Create Slot
               </button>
 
@@ -721,9 +858,13 @@ export default function Admin() {
                   {slots.map((slot) => (
                     <tr key={slot.id}>
 
-                      <td>{formatDateTime(slot.start_time)}</td>
+                      <td>
+                        {formatDateTime(slot.start_time)}
+                      </td>
 
-                      <td>{formatDateTime(slot.end_time)}</td>
+                      <td>
+                        {formatDateTime(slot.end_time)}
+                      </td>
 
                       <td>
                         <span
@@ -733,7 +874,9 @@ export default function Admin() {
                               : "status-booked"
                           }`}
                         >
-                          {slot.is_available ? "Available" : "Booked"}
+                          {slot.is_available
+                            ? "Available"
+                            : "Booked"}
                         </span>
                       </td>
 
